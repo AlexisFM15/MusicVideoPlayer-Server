@@ -1,0 +1,11 @@
+import Router from 'express'
+import { login, logout, register } from '../controllers/auth.controller'
+
+const router = Router()
+
+router.get('/profile')
+router.post('/login',login)
+router.post('/register', register)
+router.post('/logout', logout)
+
+export default router
