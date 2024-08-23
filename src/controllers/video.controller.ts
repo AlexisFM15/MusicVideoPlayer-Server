@@ -21,11 +21,15 @@ export async function createvideo(req: Request, res: Response) {
   });
 }
 
-export async function getvideos(
-  _req: Request,
-  res: Response
-): Promise<Response> {
-  const videos = await Video.find().sort({ title: "asc" });
+export async function getvideos(req: Request,res: Response): Promise<Response> {
+  const {title, description} = req.body
+
+  let videos ={}
+  videos = await Video.find({title,description})
+  if(!title && !description) videos = await Video.find()
+  if(title && !description) videos = await Video.find({title})
+  if(!title && description) videos = await Video.find({description})
+  
   return res.json({
     videos,
     message: "success",

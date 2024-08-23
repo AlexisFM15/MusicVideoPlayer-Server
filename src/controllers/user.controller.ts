@@ -2,14 +2,19 @@ import { Request, Response } from "express";
 import User from "../models/User.model";
 import { hashPassword } from "../libs/bcrypt";
 
-export async function getUsers(_req: Request, res: Response): Promise<Response>{
-    const user = await User.find()
 
+export async function getUsers(req: Request, res: Response): Promise<Response>{
+    const {user}= req.body
+
+    let user1 = await User.find({user})
+    if(!user) user1 = await User.find()
+        
     return res.json({
-        user,
-        message:"Users List"
+        user1,
+        message:"Users Result"
     })
 }
+
 
 export async function getUser(req: Request, res: Response): Promise<Response>{
     const user = await User.findById(req.params.id)
@@ -41,8 +46,7 @@ export async function deleteUser(req:Request, res: Response): Promise<Response> 
     return res.json({
         user,
         message: "user Deleted"
-    })
-    
+    })    
 }
 
 export async function UpdateUser(req:Request , res: Response): Promise<Response>{

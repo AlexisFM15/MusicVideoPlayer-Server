@@ -21,15 +21,20 @@ export async function createSong(req: Request, res: Response) {
   });
 }
 
-export async function getSongs(
-  _req: Request,
-  res: Response
-): Promise<Response> {
-  const songs = await Music.find().sort({ title: "asc" });
+export async function getSongs(req: Request,res: Response): Promise<Response> {
+  const {title, description} = req.body
+
+  let songs ={}
+  songs = await Music.find({title,description})
+  if(!title && !description) songs = await Music.find()
+  if(title && !description) songs = await Music.find({title})
+  if(!title && description) songs = await Music.find({description})
+  
   return res.json({
     songs,
     message: "success",
   });
+  
 }
 
 export async function getSong(req: Request, res: Response): Promise<Response> {

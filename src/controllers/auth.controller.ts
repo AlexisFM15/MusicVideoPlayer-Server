@@ -16,7 +16,11 @@ export async function register(req: Request, res: Response) {
 
   const token = createToken(newUser)
 
-  res.cookie("token", token).json({
+  res.cookie("token", token,{
+    httpOnly: true, // la cookie solo se accede desde el servidor
+    sameSite: 'strict', // solo se puede acceder en el mismo dominio
+    //maxAge: 1000 * 60 * 60 //tiempo de validez de una hora
+  }).json({
     userAdd,
     message: "register complete",
   });

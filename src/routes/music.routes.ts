@@ -9,15 +9,16 @@ import {
 } from "../controllers/music.controller";
 import multer from "../libs/multer";
 import { AuthRequired } from "../middleware/Auth.middleware";
+import { musicFilter } from "../middleware/music.middleware";
 
 const router = Router();
 
 router
-  .post("/music", multer.single("music"), createSong)
-  .get("/music",AuthRequired, getSongs);
-router.get("/music/:id", getSong);
-router.delete("/music/:id", deleteSong);
-router.patch("/music/:id", UpdateSong);
-router.get('/music/download/:id',DownloadSong)
+  .post("/music",AuthRequired, multer.single("music"), createSong)
+  .get("/music",AuthRequired,musicFilter, getSongs);
+router.get("/music/:id",AuthRequired, getSong);
+router.delete("/music/:id",AuthRequired, deleteSong);
+router.patch("/music/:id",AuthRequired, UpdateSong);
+router.get('/music/download/:id',AuthRequired,DownloadSong)
 
 export default router;

@@ -5,7 +5,8 @@ import path from "path";
 const storage = multer.diskStorage({
   destination: "MusicUploads",
   filename(req, file, callback) {
-    callback(null, v4() + path.extname(file.originalname));
+    callback(null, v4() + path.extname(file.originalname))
+    ;
   },
 });
 
