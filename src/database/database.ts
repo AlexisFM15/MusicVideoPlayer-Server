@@ -1,5 +1,5 @@
-import Mongoose from "mongoose";
+import Mongoose from 'mongoose'
 
 export async function DBconect() {
-  await Mongoose.connect("mongodb://localhost/music-videoPlayer", {});
+  await Mongoose.connect('mongodb://mongo/music-videoPlayer', {})
 }
