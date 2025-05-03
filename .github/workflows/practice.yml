@@ -6,8 +6,14 @@ on:
       - main
 
 jobs:
-  hello_world:
-    runs-on: ubuntu-latest
+  deploy: 
+    runs-on: ubuntu@latest
     steps:
-      - name: echo the message
-        run: echo message
+      - uses: action/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with: 
+          node-version: 20.9.0  
+      - name: install dependency
+        run: npm ci
