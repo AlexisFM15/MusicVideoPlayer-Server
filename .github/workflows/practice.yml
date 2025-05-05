@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+  pull_request: 
+    branches: [main]
+    types: [opened,synchronize]
 
 jobs:
-
   deploy: 
     runs-on: ubuntu-latest
     steps:
@@ -17,7 +19,7 @@ jobs:
         with: 
           node-version: 20  
       - name: install dependency
-        run: npm ci
+        run: npm ci 
       - name: build
         run: npm run build
       - name: test
