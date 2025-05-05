@@ -33,6 +33,7 @@ describe('user routes routes', () => {
     )
     expect(content).toContain('laura')
   })
+
   test('post users', async () => {
     const usertest = {
       user: 'malex',
@@ -44,12 +45,12 @@ describe('user routes routes', () => {
       .expect(200)
       .expect('content-type', /application\/json/)
   })
+
   test('delete user', async () => {
     const users = await api.get('/api/user')
     const userID = users.body.user.find(
       (user: { user: string }) => user.user === 'malex'
     )
-    console.log()
     await api
       .delete(`/api/user/${userID._id}`)
       .expect(200)
