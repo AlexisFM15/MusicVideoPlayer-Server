@@ -2,3 +2,4 @@ node_modules
 MusicUploads
 dist
 .git
+coverage
