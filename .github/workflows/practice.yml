@@ -45,7 +45,7 @@ jobs:
           node-version: 20 
       - name: install dependencies
         run: npm ci
-      - uses: actions/upload-artifact@latest
+      - uses: actions/download-artifact@latest
         with:
           name: dist
           path: dist
