@@ -29,7 +29,7 @@ describe('user routes routes', () => {
     const content = response.body.user.map(
       (user: { user: string }) => user.user
     )
-    expect(content).toContain('malex')
+    expect(content).toContain('laura')
   })
   test.skip('post users', async () => {
     const usertest = {
