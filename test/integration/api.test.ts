@@ -2,6 +2,7 @@ import supertest from 'supertest'
 import app from '../../src/app'
 import mongoose from 'mongoose'
 import User from '../../src/models/User.model'
+import UserModel from '../../src/models/User.model'
 
 const api = supertest(app)
 const newUsertest = {
@@ -13,6 +14,7 @@ beforeAll(async () => {
   await mongoose.connect(
     'mongodb+srv://malexfuture:malex1524@cluster0.m2yho7v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
   )
+  await UserModel.deleteMany()
   const user = new User(newUsertest)
   user.save()
 })
@@ -31,7 +33,7 @@ describe('user routes routes', () => {
     )
     expect(content).toContain('laura')
   })
-  test.skip('post users', async () => {
+  test('post users', async () => {
     const usertest = {
       user: 'malex',
       password: '12345',
@@ -39,6 +41,17 @@ describe('user routes routes', () => {
     await api
       .post('/api/user')
       .send(usertest)
+      .expect(200)
+      .expect('content-type', /application\/json/)
+  })
+  test('delete user', async () => {
+    const users = await api.get('/api/user')
+    const userID = users.body.user.find(
+      (user: { user: string }) => user.user === 'malex'
+    )
+    console.log()
+    await api
+      .delete(`/api/user/${userID._id}`)
       .expect(200)
       .expect('content-type', /application\/json/)
   })
