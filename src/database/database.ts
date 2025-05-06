@@ -6,5 +6,5 @@ const uricloud =
 const uri = 'mongodb://localhost/music-videoPlayer'
 
 export async function DBconect() {
-  await Mongoose.connect(uri, {})
+  await Mongoose.connect(uricloud, {})
 }
