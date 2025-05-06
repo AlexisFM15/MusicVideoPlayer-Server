@@ -7,7 +7,7 @@
   "scripts": {
     "start": "tsc",
     "clean": "rimraf dist",
-    "build": "npm run build && node dist/index.js",
+    "build": "npm run start && node dist/index.js",
     "dev": "nodemon src/index.ts",
     "test": "jest --verbose --detectOpenHandles "
   },
