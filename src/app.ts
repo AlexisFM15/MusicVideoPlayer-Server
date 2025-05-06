@@ -28,7 +28,7 @@ app.use('/api', videoRoutes)
 app.use('/api', userRoutes)
 app.use('/api', authRoutes)
 
-//storage
-app.use('/MusicUploads', express.static(path.resolve('/MusicUploads')))
-app.use('/VideoUploads', express.static(path.resolve('/VideoUploads')))
+// //storage
+// app.use('/MusicUploads', express.static(path.resolve('/MusicUploads')))
+// app.use('/VideoUploads', express.static(path.resolve('/VideoUploads')))
 export default app
