@@ -3,3 +3,4 @@ MusicUploads
 dist
 .git
 coverage/icov-report
+.vercel

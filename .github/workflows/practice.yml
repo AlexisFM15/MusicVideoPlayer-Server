@@ -9,22 +9,56 @@ on:
     types: [opened,synchronize]
 
 jobs:
-  deploy: 
+
+  avoid_redundancy: 
     runs-on: ubuntu-latest
     steps:
-      - name: cancel builds redundant
-        uses: styfle/cancel-workflow-action
+      - name: cancel_builds_redundant
+        uses: styfle/cancel-workflow-action@0.9.1 
         with: 
-          access_token: ${{github.token}}
+          access_token: ${{ github.token }}
+
+  build: 
+      runs-on: ubuntu-latest
+      steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with: 
-          node-version: 20  
-      - name: install dependency
-        run: npm ci 
-      - name: build
-        run: npm run build
+          node-version: 20 
+      - name: install dependencies
+        run: npm ci
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: dist
+      #     path: dist
+  test: 
+      needs: [build]
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with: 
+          cache: npm
+          node-version: 20 
+      - name: install dependencies
+        run: npm ci
+      # - uses: actions/download-artifact@v2
+      #   with:
+      #     name: dist
+      #     path: dist
       - name: test
         run: npm run test
+
+  # deploy: 
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: actions/setup-node@v4
+  #       with: 
+  #         node-version: 20  
