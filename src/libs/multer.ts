@@ -1,12 +1,7 @@
-import multer from "multer";
-import { v4 } from "uuid";
-import path from "path";
+import multer from 'multer'
+import { v4 } from 'uuid'
+import path from 'path'
 
-const storage = multer.diskStorage({
-  destination: "MusicUploads",
-  filename(req, file, callback) {
-    callback(null, v4() + path.extname(file.originalname));
-  },
-});
+const storage = multer.memoryStorage()
 
-export default multer({ storage });
+export default multer({ storage })
