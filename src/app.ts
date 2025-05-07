@@ -6,17 +6,17 @@ import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import path from 'path'
 import cookieParser from 'cookie-parser'
-// import cors from 'cors'
+import 'dotenv/config'
+// import { DBconect } from './database/database'
+import cors from 'cors'
 
+//testing uploads con push 1
+console.log('testing updates 1')
 const app = express()
 
 //middleware
-// app.use(
-//   cors({
-//     credentials: true,
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//   })
-// )
+app.use(cors())
+// DBconect()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
@@ -30,7 +30,7 @@ app.use('/api', videoRoutes)
 app.use('/api', userRoutes)
 app.use('/api', authRoutes)
 
-//storage
-app.use('/MusicUploads', express.static(path.resolve('/MusicUploads')))
-app.use('/VideoUploads', express.static(path.resolve('/VideoUploads')))
+// //storage
+// app.use('/MusicUploads', express.static(path.resolve('/MusicUploads')))
+// app.use('/VideoUploads', express.static(path.resolve('/VideoUploads')))
 export default app
