@@ -10,6 +10,8 @@ import 'dotenv/config'
 // import { DBconect } from './database/database'
 import cors from 'cors'
 
+//testing uploads con push 1
+console.log('testing updates')
 const app = express()
 
 //middleware
