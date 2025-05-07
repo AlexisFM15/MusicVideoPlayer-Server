@@ -67,4 +67,4 @@ jobs:
       - name: install dependencies
         run: npm ci
       - name: deploy
-        run: vercel --prod --token ${{ VERCEL_TOKEN }}
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
