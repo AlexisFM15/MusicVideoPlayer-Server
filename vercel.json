@@ -1,5 +1,8 @@
 {
   "version": 2,
   "builds": [{ "src": "dist/src/app.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "dist/src/app.js" }]
+  "routes": [{ "src": "/(.*)", "dest": "dist/src/app.js" }],
+  "git": {
+    "deploymentEnabled": false
+  }
 }
