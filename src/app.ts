@@ -11,7 +11,7 @@ import 'dotenv/config'
 import cors from 'cors'
 
 //testing uploads con push 1
-console.log('testing updates')
+console.log('testing updates 1')
 const app = express()
 
 //middleware
