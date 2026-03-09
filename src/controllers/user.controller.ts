@@ -1,12 +1,17 @@
 import { Request, Response } from 'express'
 import User from '../models/User.model'
 import { hashPassword } from '../libs/bcrypt'
+import { client } from '../app'
+import { stringify } from 'uuid'
 
 export async function getUsers(
   _req: Request,
   res: Response
 ): Promise<Response> {
+  const recoverDataFromCache = await client.get('user')
+  if (recoverDataFromCache) return res.json(JSON.parse(recoverDataFromCache))
   const user = await User.find()
+  const cacheData = client.set('user', JSON.stringify(user))
 
   return res.json({
     user,

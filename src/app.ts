@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser'
 import 'dotenv/config'
 // import { DBconect } from './database/database'
 import cors from 'cors'
+import { createClient } from 'redis'
 
 //testing uploads con push 1
 console.log('testing updates 1')
@@ -23,7 +24,7 @@ app.use(cookieParser())
 
 //setting
 app.set('port', process.env.PORT || 6000)
-
+export const client = createClient({})
 //routes
 app.use('/api', musicRoutes)
 app.use('/api', videoRoutes)

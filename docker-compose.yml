@@ -1,0 +1,14 @@
+version: '3.8'
+
+services: 
+  redis: 
+    image: redis
+    ports: 
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly" ,"no", "--maxmemory", "2mb", "--maxmemory-policy" , "allkeys-lru"]
+    restart: always
+
+volumes:
+  redis_data:
